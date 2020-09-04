@@ -1,4 +1,4 @@
-# ku-polls
+# KU-polls
 
 Web application for conducting online polls and surveys at [Kasetsart University](https://ku.ac.th/th)
 

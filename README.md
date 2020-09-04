@@ -10,7 +10,7 @@ This application is a part of [Individual Software Process 01219245](https://cps
 * [Requirements](../../wiki/Requirements)
 
 Iterations
-* [Iteration 1 Plan](../../wiki/Iteration%201%20Plan) and [Task Board](../../projects/iteration%201%20backlog)
+* [Iteration 1 Plan](../../wiki/Iteration%201%20Plan) and [Task Board](../../projects/1)
 
 ## Licensing
 Contact @Jomsaruj to license.

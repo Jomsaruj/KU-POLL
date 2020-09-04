@@ -12,3 +12,5 @@ This application is a part of [Individual Software Process 01219245](https://cps
 Iterations
 * [Iteration 1 Plan](../../wiki/Iteration%201%20Plan) and Task Board
 
+## Licensing
+Contact @Jomsaruj to license.

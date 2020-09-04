@@ -6,8 +6,6 @@ This application is a part of [Individual Software Process 01219245](https://cps
 
 ## Project Documents
 
-Project-related documents are in the [Project Wiki](../../wiki/Home)
-
 * [Vision Statement](../../wiki/Vision%20Statement)
 * [Requirements](../../wiki/Requirements)
 

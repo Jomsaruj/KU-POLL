@@ -3,10 +3,10 @@
     {% for question in latest_question_list %}
         <li>{{ question.question_text }}
         {% if question.can_vote %}
-            </li><a href="{% url 'polls:detail' question.id %}">{{ '>>vote' }}</a></li> &nbsp
-            </li><a href="{% url 'polls:results' question.id %}">{{ '>>results' }}</a></li>
+            </li><a href="{% url 'polls:detail' question.id %}">{{ '>> vote' }}</a></li> &nbsp
+            </li><a href="{% url 'polls:results' question.id %}">{{ '>> results' }}</a></li>
         {% else %}
-            </li><a href="{% url 'polls:results' question.id %}">{{ '>>results' }}</a></li>
+            </li><a href="{% url 'polls:results' question.id %}">{{ '>> results' }}</a></li>
         {% endif %}
     {% endfor %}
     </ul>

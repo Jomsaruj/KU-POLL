@@ -1,3 +1,11 @@
+{% if messages %}
+<ul class="messages">
+  {% for msg in messages %}
+    <a class="{{msg.tags}}">{{ msg }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
@@ -16,3 +24,4 @@
 
 {% load static %}
 <link rel = "stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+    

@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 
-__author__      = "Saruj Sattayanurak"
+__author__ = "Saruj Sattayanurak"
+
 
 def index(request):
     """

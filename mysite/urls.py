@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 from . import views
 
-__author__      = "Saruj Sattayanurak"
+__author__ = "Saruj Sattayanurak"
 
 urlpatterns = [
     path('', views.index, name="main_index_page"),

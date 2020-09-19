@@ -35,7 +35,7 @@ class Question(models.Model):
 
     def can_vote(self):
         now = timezone.now()
-        return self.is_published and now <= self.end_date
+        return self.is_published() and now <= self.end_date
 
     was_published_recently.admin_order_field = 'pub_date'
     was_published_recently.boolean = True

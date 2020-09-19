@@ -5,7 +5,7 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
 
-from .models import Question
+from .models import Question, Choice
 
 __author__ = "Saruj Sattayanurak"
 
@@ -21,16 +21,16 @@ class IndexView(generic.ListView):
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:]
 
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'polls/detail.html'
-
-    def get_queryset(self):
-        """
-       * copy comment from tutorial
-       Excludes any questions that aren't published yet.
-       """
-        return Question.objects.filter(pub_date__lte=timezone.now())
+# class DetailView(generic.DetailView):
+#     model = Question
+#     template_name = 'polls/detail.html'
+#
+#     def get_queryset(self):
+#         """
+#        * copy comment from tutorial
+#        Excludes any questions that aren't published yet.
+#        """
+#         return Question.objects.filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):
@@ -68,5 +68,5 @@ def vote_for_poll(request, question_id):
         messages.error(request, f" Warning: poll name " + question.question_text + " is already expired")
         return redirect('polls:index')
     elif question.can_vote():
-        # return redirect('polls:detail')
-        return render(request, 'polls/detail.html', {'question': question, })
+        return render(request, 'polls/detail.html', {'question': question})
+

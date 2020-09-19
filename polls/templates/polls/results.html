@@ -1,9 +1,9 @@
 <h1>{{ question.question_text }}</h1>
 
 {% if messages %}
-<ul class="messages">
+</li class="messages">
   {% for msg in messages %}
-    <a class="{{msg.tags}}">{{ msg }}</li>
+    </li> <a class="{{msg.tags}}">{{ msg }}</li><p>
   {% endfor %}
 </ul>
 {% endif %}

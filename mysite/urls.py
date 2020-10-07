@@ -1,3 +1,4 @@
+"""Add path to url."""
 from django.contrib import admin
 from django.urls import include, path
 from . import views

@@ -1,3 +1,4 @@
+"""add path to the URL."""
 from django.urls import path
 from . import views
 

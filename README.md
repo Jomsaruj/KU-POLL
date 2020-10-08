@@ -1,5 +1,6 @@
 # KU-polls
 [![Build Status](https://travis-ci.com/Jomsaruj/ku-polls.svg?branch=master)](https://travis-ci.com/Jomsaruj/ku-polls)
+[![codecov](https://codecov.io/gh/Jomsaruj/ku-polls/branch/master/graph/badge.svg)](https://codecov.io/gh/Jomsaruj/ku-polls)
 
 Web application for conducting online polls at [Kasetsart University](https://ku.ac.th/th)
 

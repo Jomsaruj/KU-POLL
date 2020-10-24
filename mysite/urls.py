@@ -9,4 +9,5 @@ urlpatterns = [
     path('', views.index, name="main_index_page"),
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

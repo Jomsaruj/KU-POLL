@@ -1,3 +1,33 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    {% if user.is_authenticated %}
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" style="margin: 5px" href="/polls">KU Poll</a>
+            </div>
+              <ul class="nav navbar-nav navbar-left">
+                  <li><a href="/accounts/logout"><button style="width: 80px; height: 35px; margin:-5px -5px;" type="button" class="btn btn-danger">Sign Out</button></a></li>
+              </ul>
+          </div>
+      </nav>
+    {% else %}
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" style="margin: 5px" href="/polls">KU Poll</a>
+            </div>
+              <ul class="nav navbar-nav navbar-left">
+                  <li><a href="/accounts/login"><button style="width: 70px; height: 35px; margin:-5px -5px;" type="button" class="btn btn-primary">Sign In</button></a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-left">
+                  <li><a href="#"><button style="width: 100px; height: 35px; margin:-5px -5px;" type="button" class="btn btn-warning">Registration</button></a></li>
+              </ul>
+          </div>
+      </nav>
+    {% endif %}
+
+
 {% if messages %}
 <ul class="messages">
   {% for msg in messages %}

@@ -62,3 +62,7 @@ def vote_for_poll(request, question_id):
         return redirect('polls:index')
     elif question.can_vote():
         return render(request, 'polls/detail.html', {'question': question})
+
+
+
+

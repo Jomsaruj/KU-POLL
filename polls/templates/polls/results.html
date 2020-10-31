@@ -1,11 +1,10 @@
 <h1>{{ question.question_text }}</h1>
 
 {% if messages %}
-</li class="messages">
+<a class="messages"></a>
   {% for msg in messages %}
-    </li> <a class="{{msg.tags}}">{{ msg }}</li><p>
+     <a class="{{msg.tags}}">{{ msg }}</a><p>
   {% endfor %}
-</ul>
 {% endif %}
 
 <table style="width:10%">
@@ -15,7 +14,8 @@
     </tr>
 {% endfor %}
 </table>
-</ul>
+
 <p>
+
 <a href="{% url 'polls:detail' question.id %}"> >> Vote again?</a><br>
 <a href="{% url 'polls:index' %}">{{ '>> home' }}</a>

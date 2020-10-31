@@ -1,7 +1,34 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    {% if user.is_authenticated %}
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" style="margin: 5px" href="/polls">KU Poll</a>
+            </div>
+              <ul class="nav navbar-nav navbar-left">
+                  <li><a href="/accounts/logout"><button style="width: 80px; height: 35px; margin:-5px -5px;" type="button" class="btn btn-danger">Sign Out</button></a></li>
+              </ul>
+          </div>
+      </nav>
+    {% else %}
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" style="margin: 5px" href="/polls">KU Poll</a>
+            </div>
+              <ul class="nav navbar-nav navbar-left">
+                  <li><a href="/accounts/login"><button style="width: 70px; height: 35px; margin:-5px -5px;" type="button" class="btn btn-primary">Sign In</button></a></li>
+              </ul>
+          </div>
+      </nav>
+    {% endif %}
+
+
 {% if messages %}
 <ul class="messages">
   {% for msg in messages %}
-    <a class="{{msg.tags}}">{{ msg }}</li>
+    <li><a class="{{msg.tags}}">{{ msg }}</a></li>>
   {% endfor %}
 </ul>
 {% endif %}
@@ -9,17 +36,19 @@
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li>{{ question.question_text }}
+        <li>{{ question.question_text }}</li>
         {% if question.can_vote %}
-            </li><a href="{% url 'polls:detail' question.id %}">{{ '>> vote' }}</a></li> &nbsp
-            </li><a href="{% url 'polls:results' question.id %}">{{ '>> results' }}</a></li>
+            <a href="{% url 'polls:detail' question.id %}">{{ '>> vote' }}</a>
+            <a href="{% url 'polls:results' question.id %}">{{ '>> results' }}</a>
         {% else %}
-            </li><a href="{% url 'polls:results' question.id %}">{{ '>> results' }}</a></li>
+            <li><a href="{% url 'polls:results' question.id %}">{{ '>> results' }}</a></li>
         {% endif %}
     {% endfor %}
     </ul>
 {% else %}
+
     <p>No polls are available.</p>
+
 {% endif %}
 
 {% load static %}

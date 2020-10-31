@@ -1,6 +1,7 @@
 """Add attribute and method for each objects."""
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 import datetime
 
 __author__ = "Saruj Sattayanurak"
@@ -17,27 +18,15 @@ class Question(models.Model):
         """Attribute question_text."""
         return self.question_text
 
-    """
-    Return True only if pub_date is in the past.
-    """
-
     def was_published_recently(self):
         """:return True if question is recently published."""
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
-    """
-    Returns True if current date is on or after question’s publication date
-    """
-
     def is_published(self):
         """:return True if question is published."""
         now = timezone.now()
         return now >= self.pub_date
-
-    """
-    Returns True if voting is currently allowed for this question
-    """
 
     def can_vote(self):
         """:return True if question is published and with in end date."""
@@ -54,8 +43,22 @@ class Choice(models.Model):
 
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+
+    @ property
+    def votes(self):
+        """:return sum of all vote in the particular question"""
+        return self.vote_set.all().count()
 
     def __str__(self):
         """Attribute choice_text."""
         return self.choice_text
+
+
+class Vote(models.Model):
+    """Attributes for Vote objects."""
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+
+
+

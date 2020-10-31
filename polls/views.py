@@ -20,16 +20,13 @@ def formatter():
     """Configure logging using basicConfig for simple configuration.
 
     You should call this before creating logging objects.
-    Call basicConfig only once.
+
     Some attributes you can set are:
         filename = (creates a FileHandler and uses it)
         stream = (name of a StreamHandler to use), cannot use with filename=
         filemode = 'a' (append mode), 'w' (truncate & open for writing)
         level = set the root logger level
 
-    See:
-        help(logging.basicConfig)
-        https://docs.python.org/3/library/logging.html#logging.basicConfig
     """
     # custom format of log messages
     FORMAT = '%(asctime)s %(name)s %(levelname)s: %(message)s'

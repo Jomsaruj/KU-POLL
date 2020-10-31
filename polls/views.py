@@ -1,4 +1,7 @@
 """Redirection for page and link to html files."""
+
+from django.contrib.auth import user_logged_in, user_logged_out, user_login_failed
+from django.dispatch import receiver
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
@@ -6,10 +9,63 @@ from django.views import generic
 from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import logging
 
 from .models import Question, Choice, Vote
 
 __author__ = "Saruj Sattayanurak"
+
+
+def formatter():
+    """Configure logging using basicConfig for simple configuration.
+
+    You should call this before creating logging objects.
+    Call basicConfig only once.
+    Some attributes you can set are:
+        filename = (creates a FileHandler and uses it)
+        stream = (name of a StreamHandler to use), cannot use with filename=
+        filemode = 'a' (append mode), 'w' (truncate & open for writing)
+        level = set the root logger level
+
+    See:
+        help(logging.basicConfig)
+        https://docs.python.org/3/library/logging.html#logging.basicConfig
+    """
+    # custom format of log messages
+    FORMAT = '%(asctime)s %(name)s %(levelname)s: %(message)s'
+    logging.basicConfig(format=FORMAT, level=logging.INFO)
+    return logging.getLogger("polls")
+
+
+def get_client_ip(request):
+    """ Getting the visitor’s actual IP address """
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+@receiver(user_logged_in)
+def check_login(request, user, **kwargs):
+    """logging for login successfully"""
+    logger = formatter()
+    logger.info("IP address: %s, Username: %s Login", get_client_ip(request), user)
+
+
+@receiver(user_login_failed)
+def check_login_fail(request, **kwargs):
+    """logging for login unsuccessfully"""
+    logger = formatter()
+    logger.warning("IP address: %s:  Login unsuccessful", get_client_ip(request))
+
+
+@receiver(user_logged_out)
+def check_logout(request, user, **kwargs):
+    """logging for logout successful"""
+    logger = formatter()
+    logger.info("IP address: %s, Username: %s Logout", get_client_ip(request), user)
 
 
 class IndexView(generic.ListView):
@@ -47,6 +103,8 @@ def vote(request, question_id):
         # user hits the Back button.
         Vote.objects.update_or_create(question=question, user=request.user, defaults={"choice": selected_choice})
         messages.success(request, "Your choice successfully recorded. Thank you.")
+        logger = formatter()
+        logger.info("IP address: %s, Username: %s Vote to question: %s", get_client_ip(request), request.user, question_id)
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 
@@ -63,7 +121,3 @@ def vote_for_poll(request, question_id):
         return redirect('polls:index')
     elif question.can_vote():
         return render(request, 'polls/detail.html', {'question': question, 'current_choice': current_choice})
-
-
-
-

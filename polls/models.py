@@ -18,27 +18,15 @@ class Question(models.Model):
         """Attribute question_text."""
         return self.question_text
 
-    """
-    Return True only if pub_date is in the past.
-    """
-
     def was_published_recently(self):
         """:return True if question is recently published."""
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
 
-    """
-    Returns True if current date is on or after question’s publication date
-    """
-
     def is_published(self):
         """:return True if question is published."""
         now = timezone.now()
         return now >= self.pub_date
-
-    """
-    Returns True if voting is currently allowed for this question
-    """
 
     def can_vote(self):
         """:return True if question is published and with in end date."""
@@ -58,6 +46,7 @@ class Choice(models.Model):
 
     @ property
     def votes(self):
+        """:return sum of all vote in the particular question"""
         return self.vote_set.all().count()
 
     def __str__(self):
@@ -66,7 +55,7 @@ class Choice(models.Model):
 
 
 class Vote(models.Model):
-    """Attribute and method for Vote objects."""
+    """Attributes for Vote objects."""
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
